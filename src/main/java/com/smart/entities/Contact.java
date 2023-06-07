@@ -6,6 +6,7 @@ import jakarta.persistence.Table;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Column;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 @Table(name="CONTACT")
@@ -18,6 +19,8 @@ public class Contact {
     private String email;
     private String phone;
     private String image;
+    @ManyToOne
+    private User user;
 	public Contact() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -64,5 +67,11 @@ public class Contact {
 	}
 	public void setImage(String image) {
 		this.image = image;
+	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
 	}
 }
