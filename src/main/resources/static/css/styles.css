@@ -4,3 +4,17 @@ body {
 .background-for-nav{
     background-color: #009688 !important;
 }
+
+.my-card{
+    background-color: #FFFFFF;
+    padding: 20px;
+}
+
+.outerdiv{
+    padding: 90px;
+}
+.form-group.required .form-label:after
+{
+      content:" *";
+      color:red;
+}
