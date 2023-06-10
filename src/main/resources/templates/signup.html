@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="base::layout(~{::section})">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::section})}">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,38 +19,36 @@
 
                 <h1 class="text-center">Sign Up</h1>
 
-                  <form action="" th:action="@{/do_register}" method="post">
+                  <form action="/doRegister" th:action="@{/doRegister}" method="post" th:object="${user}">
 
                       <div class="mb-3 form-group required">
                           <label for="name_field" class="form-label">Name</label>
-                          <input type="text" class="form-control" id="name_field" aria-describedby="emailHelp" placeholder="John" required="required">
+                          <input name="name" type="text" class="form-control" id="name_field" aria-describedby="emailHelp" placeholder="John" required="required" th:value="${user.name}">
 
                       </div>
 
                       <div class="mb-3 form-group required">
                           <label for="exampleInputEmail1" class="form-label">Email Address</label>
-                          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="example@abc.com" required="required">
+                          <input name="email"  type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="example@abc.com" required="required" th:value="${user.email}">
 
                       </div>
 
                       <div class="mb-3 form-group required">
                           <label for="password-field" class="form-label">Password</label>
-                          <input type="password" class="form-control" id="password-field" aria-describedby="emailHelp" placeholder="Enter Password" required="required">
+                          <input name="password" type="password" class="form-control" id="password-field" aria-describedby="emailHelp" placeholder="Enter Password" required="required" >
 
                       </div>
 
                       <div class="mb-3 form-group required">
                           <label for="confirm-password-field" class="form-label">Confirm Password</label>
-                          <input type="password" class="form-control" id="confirm-password-field" aria-describedby="emailHelp" placeholder="Confirm Password" required="required">
+                          <input name="confirmPassword" type="password" class="form-control" id="confirm-password-field" aria-describedby="emailHelp" placeholder="Confirm Password" required="required">
 
                       </div>
 
                       <div class="container text-center">
-
                           <button type="submit" class="btn background-for-nav text-white">
                               Submit
                           </button>
-
                       </div>
 
 
