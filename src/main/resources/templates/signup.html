@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="base::layout(~{::section})">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+<section>
+
+  <div class="container outerdiv">
+
+      <div class="row">
+
+          <div class="col-md-8 offset-md-2">
+
+              <div class="my-card">
+
+                <h1 class="text-center">Sign Up</h1>
+
+                  <form action="" th:action="@{/do_register}" method="post">
+
+                      <div class="mb-3 form-group required">
+                          <label for="name_field" class="form-label">Name</label>
+                          <input type="text" class="form-control" id="name_field" aria-describedby="emailHelp" placeholder="John" required="required">
+
+                      </div>
+
+                      <div class="mb-3 form-group required">
+                          <label for="exampleInputEmail1" class="form-label">Email Address</label>
+                          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="example@abc.com" required="required">
+
+                      </div>
+
+                      <div class="mb-3 form-group required">
+                          <label for="password-field" class="form-label">Password</label>
+                          <input type="password" class="form-control" id="password-field" aria-describedby="emailHelp" placeholder="Enter Password" required="required">
+
+                      </div>
+
+                      <div class="mb-3 form-group required">
+                          <label for="confirm-password-field" class="form-label">Confirm Password</label>
+                          <input type="password" class="form-control" id="confirm-password-field" aria-describedby="emailHelp" placeholder="Confirm Password" required="required">
+
+                      </div>
+
+                      <div class="container text-center">
+
+                          <button type="submit" class="btn background-for-nav text-white">
+                              Submit
+                          </button>
+
+                      </div>
+
+
+                  </form>
+
+
+              </div>
+
+          </div>
+
+      </div>
+
+
+  </div>
+
+
+</section>
+</body>
+</html>
