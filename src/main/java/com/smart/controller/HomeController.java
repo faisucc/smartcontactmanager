@@ -1,8 +1,10 @@
 package com.smart.controller;
 
+import com.smart.entities.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
+
 
 @Controller
 public class HomeController {
@@ -22,7 +24,14 @@ public class HomeController {
 	@GetMapping("/signup")
 	public String signup(Model model) {
 		model.addAttribute("title", "Sign Up - Smart Contact Manager");
+		model.addAttribute("user", new User());
 		return "signup";
 	}
-	
+
+	@PostMapping("/doRegister")
+	public String handlingUserRegistration(@ModelAttribute("user") User userModel, @RequestParam("confirmPassword") String pwdConfirm, Model model){
+		System.out.println("User: " + userModel.toString());
+		System.out.println("confirm Pwd" + pwdConfirm);
+        return "signup";
+	}
 }
