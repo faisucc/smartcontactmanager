@@ -28,10 +28,10 @@
           <a class="nav-link active" th:href="@{/about}">About</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="/user/index">Login</a>
+          <a class="nav-link active" href="#"><span th:text="${user.name}"></span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" th:href="@{/signup}">Sign Up</a>
+          <a class="nav-link active" th:href="@{/logout}">Logout</a>
         </li>
       </ul>
     </div>

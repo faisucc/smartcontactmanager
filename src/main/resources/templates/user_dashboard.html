@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="userBase::layout(~{::section})">
 <head>
     <meta charset="UTF-8">
-    <title>User Dashboard</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 </head>
 <body>
- <section>
-     <h1>Name <span th:text="${user.name}"></span></h1>
-     <h1>Email <span th:text="${user.email}"></span></h1>
-     <h1><a href="" th:href="${/logout}">Logout</a></h1>
- </section>
+<section>
+    <h1> Name: <span th:text="${user.name}"></span> </h1>
+    <h1> Email: <span th:text="${user.email}"></span></h1>
+</section>
 </body>
 </html>
