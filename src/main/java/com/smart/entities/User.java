@@ -10,6 +10,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.CascadeType;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
+
 import java.util.*;
 @Entity
 @Table(name="USER")
@@ -17,9 +20,13 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
+
+	@Size(max=30, message="Maximum of 30 characters are only allowed.")
 	private String name;
 	@Column(unique = true)
 	private String email;
+	@Size(min=8, message = "Minimum 8 characters required")
+	@Pattern(regexp = "^(?=.*\\\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$", message = "Your password must contain an uppercase letter, a lowercase letter, a number and a special character.")
 	private String password;
 	private String imageURL;
 	private String role;
