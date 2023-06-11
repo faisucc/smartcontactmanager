@@ -26,7 +26,8 @@ public class User {
 	@Column(unique = true)
 	private String email;
 	@Size(min=8, message = "Minimum 8 characters required")
-	@Pattern(regexp = "^(?=.*\\\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$", message = "Your password must contain an uppercase letter, a lowercase letter, a number and a special character.")
+	@Pattern(regexp = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$", message = "Your password must contain an uppercase letter, a lowercase letter, a number, and a special character.")
+
 	private String password;
 	private String imageURL;
 	private String role;

@@ -6,6 +6,7 @@ import com.smart.helper.Message;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,6 +15,9 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class HomeController {
+
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
 
 	@Autowired
 	private UserRepository userRepository;
@@ -54,6 +58,7 @@ public class HomeController {
 			}
 
 			userModel.setRole("USER");
+			userModel.setPassword(passwordEncoder.encode(userModel.getPassword()));
 
 			User saved = this.userRepository.save(userModel);
 			model.addAttribute("user", saved);

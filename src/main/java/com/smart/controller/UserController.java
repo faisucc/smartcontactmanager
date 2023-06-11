@@ -5,17 +5,15 @@ import org.springframework.web.bind.annotation.*;
 import com.smart.dao.UserRepository;
 import com.smart.entities.*;
 @Controller
+@RequestMapping("/user")
 public class UserController {
     
 	@Autowired
 	private UserRepository userRepository;
-	@GetMapping("/test")
-	@ResponseBody
-	public String checkDatabase() {
-		User user =new User();
-		user.setName("ammu");
-		user.setEmail("amritha1@gmail.com");
-		userRepository.save(user);
-		return "Working";
+
+	@RequestMapping("/index")
+	public String index(){
+		return "user/user_dashboard";
 	}
+
 }
