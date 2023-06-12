@@ -52,6 +52,7 @@ public class HomeController {
 			}
 
 			if(result.hasErrors()){
+				System.out.println("entered if block in signup page");
 				System.out.println("ERROR " + result.toString());
 				model.addAttribute("user", userModel);
 				return "signup";

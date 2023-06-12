@@ -19,7 +19,7 @@ public class Contact {
     @Column(unique = true)
     private String email;
 	@Size(min=10, max=10, message = "Phone no is supposed to have 10 digits")
-	@Pattern(regexp = "\\d+", message = "Can only contain digits")
+	@Pattern(regexp = "\\d{10}", message = "Can only contain digits")
 	@Column(unique = true)
     private String phone;
 	private String countryCode;

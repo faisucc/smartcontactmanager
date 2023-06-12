@@ -18,6 +18,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.security.Principal;
+import java.util.regex.Pattern;
 
 @Controller
 @RequestMapping("/user")
@@ -48,16 +49,28 @@ public class UserController {
 	}
 
 	@PostMapping("/process-contact")
-	public String contactProcessing(@Valid @ModelAttribute("contact") Contact contact, Principal principal, BindingResult result, HttpSession session, Model model, @RequestParam("profileImage")MultipartFile file){
+	public String contactProcessing(@ModelAttribute("contact") Contact contact, Principal principal, BindingResult result, @RequestParam("profileImage")MultipartFile file, Model model, HttpSession session) throws Exception{
     try{
-		//System.out.println("contact data "+ contact.toString());
-		if (result.hasErrors()) {
-			// Handle validation errors
-			session.setAttribute("message", new Message("Invalid phone no format" , "alert-danger"));
-			System.out.println("Error by phone: " + result.toString());
-			model.addAttribute("contact", contact);
-			return "add_contact_form";
+		System.out.println("contact data "+ contact.toString());
+//		if (result.hasErrors()) {
+//			// Handle validation errors
+//			session.setAttribute("message", new Message("Invalid phone no format" , "alert-danger"));
+//			System.out.println("Error by phone: " + result.toString());
+//			model.addAttribute("contact", contact);
+//			return "add_contact_form";
+//		}
+
+		String numericRegex = "^[0-9]+$";
+		if(contact.getPhone().length() != 10){
+//			session.setAttribute("message", new Message("Phone number has to be 10 digits." , "alert-danger"));
+			throw new Exception("Phone number has to be 10 digits.");
 		}
+
+		if (!Pattern.matches(numericRegex, contact.getPhone())){
+//			session.setAttribute("message", new Message("Phone number must contain only numbers." , "alert-danger"));
+			throw new Exception("Phone number must contain only numbers.");
+		}
+
 		if(!file.isEmpty()){
 			contact.setImage(file.getOriginalFilename());
 			File uploadedImage = new ClassPathResource("static/img").getFile();
