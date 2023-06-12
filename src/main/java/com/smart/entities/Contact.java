@@ -18,26 +18,38 @@ public class Contact {
     @Column(unique = true)
     private String email;
     private String phone;
-    private String image;
+	private String countryCode;
+	private String image;
     @ManyToOne
     private User user;
 	public Contact() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Contact(int cid, String name, String email, String phone, String image) {
-		super();
+	public Contact(int cid, String name, String email, String phone, String countryCode, String image, User user) {
 		this.cid = cid;
 		this.name = name;
 		this.email = email;
 		this.phone = phone;
+		this.countryCode = countryCode;
 		this.image = image;
+		this.user = user;
 	}
-    @Override
+
+
+	@Override
 	public String toString() {
-		return "Contact [cid=" + cid + ", name=" + name + ", email=" + email + ", phone=" + phone + ", image=" + image
-				+ "]";
+		return "Contact{" +
+				"cid=" + cid +
+				", name='" + name + '\'' +
+				", email='" + email + '\'' +
+				", phone='" + phone + '\'' +
+				", countryCode='" + countryCode + '\'' +
+				", image='" + image + '\'' +
+				", user=" + user +
+				'}';
 	}
+
 	public int getCid() {
 		return cid;
 	}
@@ -58,6 +70,12 @@ public class Contact {
 	}
 	public String getPhone() {
 		return phone;
+	}
+	public String getCountryCode() {
+		return countryCode;
+	}
+	public void setCountryCode(String countryCode) {
+		this.countryCode = countryCode;
 	}
 	public void setPhone(String phone) {
 		this.phone = phone;

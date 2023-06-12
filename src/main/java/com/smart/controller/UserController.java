@@ -15,12 +15,25 @@ public class UserController {
 	@Autowired
 	private UserRepository userRepository;
 
-	@RequestMapping("/index")
-	public String index(Model model, Principal principal){
+	@ModelAttribute
+	public void addCommonData(Model model, Principal principal){
 		String email = principal.getName();
 		User user = userRepository.findByEmail(email);
 		model.addAttribute("user", user);
+	}
+
+	@RequestMapping("/index")
+	public String index(Model model, Principal principal){
+		model.addAttribute("title", "User Dashboard - Smart Contact Manager");
 		return "user_dashboard";
+	}
+
+	@GetMapping("/add_contact")
+	public String addContactForm(Model model){
+		model.addAttribute("title", "Add Contact - Smart Contact Manager");
+		model.addAttribute("contact", new Contact());
+
+		return "user/add_contact_form";
 	}
 
 }

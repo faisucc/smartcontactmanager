@@ -5,9 +5,18 @@ body {
     background-color: #009688 !important;
 }
 
+.btn-menu{
+    padding-left: 0;
+}
+
 .my-card{
     background-color: #FFFFFF;
     padding: 20px;
+}
+
+.menu-button{
+    width: 20px;
+    height: 20px;
 }
 
 .outerdiv{
@@ -30,4 +39,44 @@ body {
 }
 #login .container #login-row #login-column #login-box #login-form #register-link {
   margin-top: 0px;
+}
+
+.home-icon{
+    width: 20px;
+    height: 20px;
+    margin-right: 30px; /* Adjust this value as needed */
+}
+
+.menu-links {
+  list-style-type: none;
+  padding: 0;
+}
+
+.nav-link {
+  margin-bottom: 10px;
+}
+
+.nav-link a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #333333;
+  background-color: #f8f8f8;
+  padding: 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.nav-link a:hover {
+  background-color: #009688;
+}
+
+.home-icon,
+.text {
+  margin-right: 10px;
+}
+
+.form-icons{
+    width: 25px;
+    height: 25px;
 }
