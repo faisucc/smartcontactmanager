@@ -14,7 +14,10 @@
           <div class="card-body">
 
               <h1 class="text-center">Add Contact</h1>
-
+              <div th:if="${session.message != null}" th:classappend="${session.message.contentType}" class="alert text-center" role="alert">
+                  <p th:text="${session.message.message}"></p>
+                  <th:block th:remove="all"></th:block>
+              </div>
               <div class="container-fluid mt-1">
               <div class="row">
 
@@ -89,10 +92,12 @@
 
                             </div>
 
-                            <input type="text" name="phone" placeholder="Enter Phone Number" class="form-control">
+                            <input type="text" name="phone" class="form-control " th:classappend="${#fields.hasErrors('phone') ? 'is-invalid' : ''}" placeholder="Enter Phone Number" required="required">
+<!--                            <div class="invalid-feedback" th:each="e : ${#fields.errors('phone')}" th:text="${e}">-->
+                            <div class="invalid-feedback" th:errors="*{phone}"></div>
+                            </div>
 
-                        </div>
-
+                        <br>
                         <div class="custom-file mt-4">
                             <input type="file" name="profileImage">
 
@@ -100,7 +105,7 @@
 
                         <div class="container text-center">
 
-                            <button class="btn background-for-nav text-white">Add Contact</button>
+                            <button class="btn background-for-nav text-white" type="submit">Add Contact</button>
 
                         </div>
 

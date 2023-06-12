@@ -7,7 +7,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Column;
 import jakarta.persistence.ManyToOne;
-
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 @Entity
 @Table(name="CONTACT")
 public class Contact {
@@ -17,6 +18,9 @@ public class Contact {
     private String name;
     @Column(unique = true)
     private String email;
+	@Size(min=10, max=10, message = "Phone no is supposed to have 10 digits")
+	@Pattern(regexp = "\\d+", message = "Can only contain digits")
+	@Column(unique = true)
     private String phone;
 	private String countryCode;
 	private String image;

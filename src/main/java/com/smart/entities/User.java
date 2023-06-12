@@ -31,6 +31,9 @@ public class User {
 	private String password;
 	private String imageURL;
 	private String role;
+
+
+
 	@OneToMany(cascade=CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
 	private List<Contact> contacts = new ArrayList<>();
 	
@@ -73,6 +76,13 @@ public class User {
 	}
 	public void setRole(String role) {
 		this.role = role;
+	}
+	public List<Contact> getContacts() {
+		return contacts;
+	}
+
+	public void setContacts(List<Contact> contacts) {
+		this.contacts = contacts;
 	}
 	@Override
 	public String toString() {
