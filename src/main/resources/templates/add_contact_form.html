@@ -14,7 +14,8 @@
         <div class="card-body">
 
             <h1 class="text-center">Add Contact</h1>
-            <div th:if="${session.message != null}" th:classappend="${session.message.contentType}" class="alert text-center" role="alert">
+            <div th:if="${session.message != null}" th:classappend="${session.message.contentType}"
+                 class="alert text-center" role="alert">
                 <p th:text="${session.message.message}"></p>
                 <th:block th:remove="all"></th:block>
             </div>
@@ -23,7 +24,8 @@
 
                     <div class="col-md-10 offset-md-1">
 
-                        <form action="#" th:action="@{/user/process-contact}" method="post" th:object="${contact}"  enctype="multipart/form-data"  class="mt-2" id="contact-form">
+                        <form action="#" th:action="@{/user/process-contact}" method="post" th:object="${contact}"
+                              enctype="multipart/form-data" class="mt-2" id="contact-form">
 
                             <div class="input-group mt-4">
 
@@ -74,7 +76,8 @@
 
                                 </div>
 
-                                <input type="text" name="countryCode" placeholder="Enter Country Code" class="form-control">
+                                <input type="text" name="countryCode" placeholder="Enter Country Code"
+                                       class="form-control">
 
                             </div>
 
@@ -93,9 +96,12 @@
                                 </div>
 
 
-                                <input type="text" name="phone" id="phonenoJsCheck" class="form-control " th:classappend="${#fields.hasErrors('phone') ? 'is-invalid' : ''}" placeholder="Enter Phone Number" required="required">
-                                <div class="invalid-feedback" th:each="e : ${#fields.errors('phone')}" th:text="${e}"> </div>
-<!--                                <div class="invalid-feedback" th:errors="*{phone}"></div>-->
+                                <input type="text" name="phone" id="phonenoJsCheck" class="form-control "
+                                       th:classappend="${#fields.hasErrors('phone') ? 'is-invalid' : ''}"
+                                       placeholder="Enter Phone Number" required="required">
+                                <div class="invalid-feedback" th:each="e : ${#fields.errors('phone')}"
+                                     th:text="${e}"></div>
+                                <!--                                <div class="invalid-feedback" th:errors="*{phone}"></div>-->
                             </div>
 
                             <br>
@@ -124,11 +130,5 @@
 
 
 </section>
-
-
-
 </body>
-
-
-
 </html>

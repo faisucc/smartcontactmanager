@@ -1,9 +1,12 @@
 package com.smart.controller;
+import com.smart.dao.ContactRepository;
 import com.smart.helper.Message;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,6 +21,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.security.Principal;
+import java.util.Collections;
+import java.util.List;
 import java.util.regex.Pattern;
 
 @Controller
@@ -26,7 +31,8 @@ public class UserController {
     
 	@Autowired
 	private UserRepository userRepository;
-
+    @Autowired
+	private ContactRepository contactRepository;
 	@ModelAttribute
 	public void addCommonData(Model model, Principal principal){
 		String email = principal.getName();
@@ -91,4 +97,16 @@ public class UserController {
 	return "add_contact_form";
 	}
 
+	@GetMapping("/show-contacts/{page}")
+	public String showContacts(@PathVariable("page")Integer page, Model model, Principal principal){
+	  model.addAttribute("title","Show contacts");
+	  String email = principal.getName();
+	  User user = userRepository.findByEmail(email);
+//	  List<Contact> contacts = user.getContacts();
+	  Page<Contact> contacts = contactRepository.findByUser(user, PageRequest.of(page,5));
+	  model.addAttribute("contacts", contacts);
+	  model.addAttribute("currentPage", page);
+	  model.addAttribute("totalPages", contacts.getTotalPages());
+      return "showContacts";
+	}
 }
