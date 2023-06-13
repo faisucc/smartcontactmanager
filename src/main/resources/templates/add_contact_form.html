@@ -8,11 +8,8 @@
 </head>
 <body>
 <section>
-
     <div class="card">
-
         <div class="card-body">
-
             <h1 class="text-center">Add Contact</h1>
             <div th:if="${session.message != null}" th:classappend="${session.message.contentType}"
                  class="alert text-center" role="alert">
@@ -21,81 +18,43 @@
             </div>
             <div class="container-fluid mt-1">
                 <div class="row">
-
                     <div class="col-md-10 offset-md-1">
-
                         <form action="#" th:action="@{/user/process-contact}" method="post" th:object="${contact}"
                               enctype="multipart/form-data" class="mt-2" id="contact-form">
-
                             <div class="input-group mt-4">
-
                                 <div class="input-group-prepend">
-
                                     <div class="input-group-text mr-3">
-
                                         <img class="form-icons" src="/img/plus.png" alt="plus-icon">
-
                                     </div>
-
                                 </div>
-
                                 <input type="text" name="name" placeholder="Enter Contact Name" class="form-control">
-
                             </div>
-
                             <!--                        email field-->
-
                             <div class="input-group mt-4">
-
                                 <div class="input-group-prepend">
-
                                     <div class="input-group-text mr-3">
-
                                         <img class="form-icons" src="/img/email.png" alt="plus-icon">
-
                                     </div>
-
                                 </div>
-
                                 <input type="email" name="email" placeholder="Enter Contact Email" class="form-control">
-
                             </div>
-
                             <!--                        country code-->
-
-
                             <div class="input-group mt-4">
-
                                 <div class="input-group-prepend">
-
                                     <div class="input-group-text mr-3">
-
                                         <img class="form-icons" src="/img/world.png" alt="plus-icon">
-
                                     </div>
-
                                 </div>
-
                                 <input type="text" name="countryCode" placeholder="Enter Country Code"
                                        class="form-control">
-
                             </div>
-
                             <!--                        phone number-->
-
                             <div class="input-group mt-4">
-
                                 <div class="input-group-prepend">
-
                                     <div class="input-group-text mr-3">
-
                                         <img class="form-icons" src="/img/phone.png" alt="plus-icon">
-
                                     </div>
-
                                 </div>
-
-
                                 <input type="text" name="phone" id="phonenoJsCheck" class="form-control "
                                        th:classappend="${#fields.hasErrors('phone') ? 'is-invalid' : ''}"
                                        placeholder="Enter Phone Number" required="required">
@@ -103,32 +62,19 @@
                                      th:text="${e}"></div>
                                 <!--                                <div class="invalid-feedback" th:errors="*{phone}"></div>-->
                             </div>
-
                             <br>
                             <div class="custom-file mt-4">
                                 <input type="file" name="profileImage">
-
                             </div>
-
                             <div class="container text-center">
-
                                 <button class="btn background-for-nav text-white" type="submit">Add Contact</button>
-
                             </div>
-
                         </form>
-
                     </div>
-
                 </div>
-
             </div>
-
         </div>
-
     </div>
-
-
 </section>
 </body>
 </html>

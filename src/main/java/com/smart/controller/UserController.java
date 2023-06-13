@@ -16,13 +16,12 @@ import com.smart.entities.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
+import java.io.InputStream;
+import java.nio.file.*;
 import java.security.Principal;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.regex.Pattern;
 
 @Controller
@@ -83,6 +82,10 @@ public class UserController {
 			Path path = Paths.get(uploadedImage.getAbsolutePath() + File.separator + file.getOriginalFilename());
 			Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
 		}
+		else{
+			String emptyFileName = "empty-pic.png";
+			contact.setImage(emptyFileName);
+		}
 		String userName = principal.getName();
 		User user = userRepository.findByEmail(userName);
 		contact.setUser(user);
@@ -109,4 +112,13 @@ public class UserController {
 	  model.addAttribute("totalPages", contacts.getTotalPages());
       return "showContacts";
 	}
+
+	@RequestMapping("/contact/{cid}")
+	public String showContactDetail(@PathVariable("cid") Integer cid, Model model){
+		Optional<Contact> contactOptional = this.contactRepository.findById(cid);
+		Contact contact = contactOptional.get();
+		model.addAttribute("contact", contact);
+		return "contact_details";
+	}
+
 }
