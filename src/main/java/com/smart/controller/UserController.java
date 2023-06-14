@@ -114,10 +114,29 @@ public class UserController {
 	}
 
 	@RequestMapping("/contact/{cid}")
-	public String showContactDetail(@PathVariable("cid") Integer cid, Model model){
-		Optional<Contact> contactOptional = this.contactRepository.findById(cid);
-		Contact contact = contactOptional.get();
-		model.addAttribute("contact", contact);
+	public String showContactDetail(@PathVariable("cid") Integer cid, Model model, Principal principal, HttpSession session) throws Exception{
+		try {
+			if(null != session.getAttribute("message"))
+				session.removeAttribute("message");
+			if(!contactRepository.findById(cid).isPresent()){
+				throw new Exception("This is an invalid operation");
+			}
+			Optional<Contact> contactOptional = this.contactRepository.findById(cid);
+			Contact contact = contactOptional.get();
+			System.out.println(contactOptional+"wtf"+contact.toString());
+			String email = principal.getName();
+			User user = userRepository.findByEmail(email);
+			if (user.getId() == contact.getUser().getId()) {
+				model.addAttribute("title","Contact - " + contact.getName() );
+				model.addAttribute("contact", contact);
+			}else {
+
+				throw new Exception("This person is not present in your contact list.");
+			}
+		}catch (Exception e){
+			e.printStackTrace();
+			session.setAttribute("message", new Message( e.getMessage() , "alert-danger"));
+		}
 		return "contact_details";
 	}
 
