@@ -29,7 +29,7 @@
           <td th:text="${contact.phone}"></td>
           <td>
             <button class="btn btn-success btn-small">Edit</button>
-            <button class="btn btn-danger btn-small">Delete</button>
+            <a href="#" th:onclick="|deleteContact(${contact.cid})|" class="btn btn-danger btn-small">Delete</a>
           </td>
         </tr>
         </tbody>

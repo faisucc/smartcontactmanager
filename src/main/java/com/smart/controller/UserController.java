@@ -140,4 +140,34 @@ public class UserController {
 		return "contact_details";
 	}
 
+	@GetMapping("/delete/{cid}")
+	public String deleteContact(@PathVariable("cid") Integer cid, Principal principal, HttpSession session) throws Exception{
+
+		try{
+			if(null != session.getAttribute("message")){
+				session.removeAttribute("message");
+			}
+			if(!contactRepository.findById(cid).isPresent()){
+				throw new Exception("This is an invalid operation");
+			}
+			Optional<Contact> contactOptional= this.contactRepository.findById(cid);
+			Contact contact = contactOptional.get();
+			String email = principal.getName();
+			User user = userRepository.findByEmail(email);
+			if (user.getId() == contact.getUser().getId()){
+				contact.setUser(null);
+				this.contactRepository.delete(contact);
+				session.setAttribute("message", new Message("Contact deleted successfully", "success"));
+
+			}else{
+				throw new Exception("This person is not present in your contact list.");
+			}
+		}catch (Exception e){
+			e.printStackTrace();
+			session.setAttribute("message", new Message( e.getMessage() , "alert-danger"));
+			return "showContacts";
+		}
+		return "redirect:/user/show-contacts/0";
+	}
+
 }
