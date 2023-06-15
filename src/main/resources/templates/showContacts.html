@@ -28,8 +28,8 @@
           <td><a href="" th:href="@{'/user/contact/' + ${contact.cid}}" style="decoration:none;"><span th:text="${contact.email}"></span></a></td>
           <td th:text="${contact.phone}"></td>
           <td>
-            <button class="btn btn-success btn-small">Edit</button>
-            <a href="#" th:onclick="|deleteContact(${contact.cid})|" class="btn btn-danger btn-small">Delete</a>
+            <form method="post" th:action="@{'/user/update-contact/' + ${contact.cid}}" style="display: inline-block;"><button type="submit" class="btn btn-success btn-small">Edit</button></form>
+            <a href="#" th:onclick="|deleteContact(${contact.cid})|" class="btn btn-danger btn-small" style="display: inline-block;">Delete</a>
           </td>
         </tr>
         </tbody>
