@@ -60,7 +60,7 @@ public class HomeController {
 
 			userModel.setRole("USER");
 			userModel.setPassword(passwordEncoder.encode(userModel.getPassword()));
-
+            userModel.setImageURL("default.png");
 			User saved = this.userRepository.save(userModel);
 			model.addAttribute("user", saved);
 			session.setAttribute("message", new Message("You have been successfully registered.", "alert-success"));

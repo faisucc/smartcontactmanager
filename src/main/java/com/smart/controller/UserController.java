@@ -56,6 +56,9 @@ public class UserController {
 	@PostMapping("/process-contact")
 	public String contactProcessing(@ModelAttribute("contact") Contact contact, Principal principal, BindingResult result, @RequestParam("profileImage")MultipartFile file, Model model, HttpSession session) throws Exception{
     try{
+		if(null != session.getAttribute("message")){
+			session.removeAttribute("message");
+		}
 		System.out.println("contact data "+ contact.toString());
 //		if (result.hasErrors()) {
 //			// Handle validation errors
@@ -101,7 +104,10 @@ public class UserController {
 	}
 
 	@GetMapping("/show-contacts/{page}")
-	public String showContacts(@PathVariable("page")Integer page, Model model, Principal principal){
+	public String showContacts(@PathVariable("page")Integer page, Model model, Principal principal, HttpSession session){
+		if(null != session.getAttribute("message")){
+			session.removeAttribute("message");
+		}
 	  model.addAttribute("title","Show contacts");
 	  String email = principal.getName();
 	  User user = userRepository.findByEmail(email);
@@ -155,8 +161,8 @@ public class UserController {
 			String email = principal.getName();
 			User user = userRepository.findByEmail(email);
 			if (user.getId() == contact.getUser().getId()){
-				contact.setUser(null);
-				this.contactRepository.delete(contact);
+				user.getContacts().remove(contact);
+				this.userRepository.save(user);
 				session.setAttribute("message", new Message("Contact deleted successfully", "success"));
 
 			}else{
@@ -171,7 +177,10 @@ public class UserController {
 	}
 
 	@PostMapping("/update-contact/{cid}")
-	public String updateForm(@PathVariable("cid") Integer cid, Model model){
+	public String updateForm(@PathVariable("cid") Integer cid, Model model, HttpSession session){
+		if(null != session.getAttribute("message")){
+			session.removeAttribute("message");
+		}
 		model.addAttribute("title", "Update Contact");
 		Optional<Contact> contactOptional= this.contactRepository.findById(cid);
 		Contact contact = contactOptional.get();
@@ -179,4 +188,34 @@ public class UserController {
 		return "update_form";
 	}
 
+	@PostMapping("/process-updated-contact")
+	public String processTheUpdatedContact(@ModelAttribute Contact contact, Model model, @RequestParam("profileImage")MultipartFile file, HttpSession session, Principal principal){
+        try{
+			if(null != session.getAttribute("message")){
+				session.removeAttribute("message");
+			}
+			if(!file.isEmpty()){
+				contact.setImage(file.getOriginalFilename());
+				File uploadedImage = new ClassPathResource("static/img").getFile();
+				Path path = Paths.get(uploadedImage.getAbsolutePath() + File.separator + file.getOriginalFilename());
+				Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+			}
+
+			String userName = principal.getName();
+			User user = userRepository.findByEmail(userName);
+			contact.setUser(user);
+			System.out.println(contact+"wtf");
+            this.contactRepository.save(contact);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return "redirect:/user/contact/"+contact.getCid();
+	}
+
+	@GetMapping("/profile")
+	public String profile(Model m){
+		m.addAttribute("title","Your Profile");
+
+		return "profile";
+	}
 }

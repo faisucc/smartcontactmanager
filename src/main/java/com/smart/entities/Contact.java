@@ -16,7 +16,6 @@ public class Contact {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int cid;
     private String name;
-    @Column(unique = true)
     private String email;
 	@Size(min=10, max=10, message = "Phone no is supposed to have 10 digits")
 	@Pattern(regexp = "\\d{10}", message = "Can only contain digits")
