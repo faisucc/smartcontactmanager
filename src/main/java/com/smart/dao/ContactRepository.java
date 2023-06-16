@@ -10,4 +10,5 @@ import java.util.List;
 
 public interface ContactRepository extends JpaRepository<Contact, Integer> {
     public Page<Contact> findByUser(User user, Pageable pageable);
+    public List<Contact> findByNameContainingAndUser(String name, User user);
 }

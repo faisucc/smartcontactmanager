@@ -1,5 +1,6 @@
 package com.smart.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -24,6 +25,7 @@ public class Contact {
 	private String countryCode;
 	private String image;
     @ManyToOne
+	@JsonIgnore
     private User user;
 	public Contact() {
 		super();
