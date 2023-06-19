@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="base::layout(~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<section>
+    <div id="login">
+        <!--        <h3 class="text-center text-white pt-5">Login form</h3>-->
+        <div class="container">
+            <div id="login-row" class="row justify-content-center align-items-center">
+                <div id="login-column" class="col-md-6">
+                    <div id="login-box" style="height:300px; background-color:#FFFFFF" class="col-md-12">
+                        <div class="alert alert-success" role="alert">
+                            OTP Sent Successfully!
+                        </div>
+                        <div class="content-wrapped mt-5 text-center">
+                            <label class="mt-2 ms-2" style="text-color:black;">Enter your registered email ID:</label><br>
+                            <form method="post" action="" th:action="@{/send_otp}">
+                                <div class="form-group mt-2">
+                                    <div class="only-input" style="margin-left:145px;">
+                                        <input name="otp" required = "required" type="text" style="border: 1px solid gray; width: 300px;" placeholder="Enter OTP here" class="form-control ms-2">
+                                    </div>
+                                    <br>
+                                    <div class="container">
+                                        <button class="btn btn-warning">Verify</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>
