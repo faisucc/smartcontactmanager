@@ -42,7 +42,10 @@ public class UserController {
 	}
 
 	@RequestMapping("/index")
-	public String index(Model model, Principal principal){
+	public String index(Model model, Principal principal, HttpSession session){
+		if(null != session.getAttribute("message")){
+			session.removeAttribute("message");
+		}
 		model.addAttribute("title", "User Dashboard - Smart Contact Manager");
 		return "user_dashboard";
 	}
@@ -231,10 +234,17 @@ public class UserController {
 		try{
 			String email = principal.getName();
 			User currentUser = this.userRepository.findByEmail(email);
+			String passwordRegExp ="^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$";
 			if(this.bCryptPasswordEncoder.matches(oldPassword,currentUser.getPassword())){
+				if(newPassword.length() < 8){
+					throw new Exception("Password must be of at least 8 characters long.");
+				}
+				if(!Pattern.matches(passwordRegExp,newPassword)){
+					throw new Exception("Your password must contain one lowercase letter, one uppercase letter, one number and one special character.");
+				}
 				currentUser.setPassword(this.bCryptPasswordEncoder.encode(newPassword));
 				this.userRepository.save(currentUser);
-				session.setAttribute("message", new Message("Password successfully updated.","success"));
+				session.setAttribute("message", new Message("Password successfully updated.","alert-success"));
 			}else{
 				throw new Exception("Incorrect old password.");
 			}

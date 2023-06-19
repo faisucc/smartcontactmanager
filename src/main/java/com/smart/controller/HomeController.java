@@ -43,17 +43,17 @@ public class HomeController {
 	@PostMapping("/doRegister")
 	public String handlingUserRegistration(@Valid @ModelAttribute("user") User userModel, BindingResult result, @RequestParam("confirmPassword") String pwdConfirm, Model model, HttpSession session) throws Exception{
 		try{
-			System.out.println("User: " + userModel.toString());
-			System.out.println("confirm Pwd: " + pwdConfirm);
+//			System.out.println("User: " + userModel.toString());
+//			System.out.println("confirm Pwd: " + pwdConfirm);
 
 			if(!pwdConfirm.equals(userModel.getPassword())){
-				System.out.println("Passwords do not match.");
+//				System.out.println("Passwords do not match.");
 				throw new Exception("Passwords do not match.");
 			}
 
 			if(result.hasErrors()){
-				System.out.println("entered if block in signup page");
-				System.out.println("ERROR " + result.toString());
+//				System.out.println("entered if block in signup page");
+//				System.out.println("ERROR " + result.toString());
 				model.addAttribute("user", userModel);
 				return "signup";
 			}
